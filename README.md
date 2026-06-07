@@ -1,2 +1,2 @@
 # WinTuner
-A safe Windows 11 optimizer and God Mode launcher for finding system tools, applying reversible tweaks, and cleaning temp files with clear warnings, logging, and undo support.
+WinTuner is a local-first Windows utility that combines a friendly God Mode-style launcher with safe, reversible system tweaks. It helps users quickly open hidden Windows tools, review optimizer profiles, clean user temp files, and track changes without risky debloat scripts, registry cleaning, telemetry, or silent security changes.
