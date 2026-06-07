@@ -16,12 +16,13 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from wintuner.app.core.version import APP_NAME, APP_VERSION, display_version
+from wintuner.app.core.version import APP_NAME, display_version
 from wintuner.app.core.admin import is_admin
 from wintuner.app.core.change_log import ChangeLog
 from wintuner.app.ui.dashboard_page import DashboardPage
 from wintuner.app.ui.god_mode_page import GodModePage
 from wintuner.app.ui.optimizer_page import OptimizerPage
+from wintuner.app.ui.search_results_page import SearchResultsPage
 from wintuner.app.ui.settings_page import AboutPage, SettingsPage
 from wintuner.app.ui.tweaks_page import TweaksPage
 from wintuner.app.ui.undo_page import UndoPage
@@ -32,6 +33,7 @@ class MainWindow(QMainWindow):
 
     NAV_ITEMS = [
         ("dashboard", "Dashboard"),
+        ("search", "Search"),
         ("godmode", "God Mode"),
         ("optimizer", "Optimizer"),
         ("tweaks", "Tweaks"),
@@ -70,12 +72,14 @@ class MainWindow(QMainWindow):
         self._global_search.setObjectName("searchBar")
         self._global_search.setPlaceholderText("Search tools and tweaks…")
         self._global_search.returnPressed.connect(self._on_global_search)
+        self._global_search.textChanged.connect(self._on_search_text_changed)
         top_bar.addWidget(self._global_search)
         content.addLayout(top_bar)
 
         self._stack = QStackedWidget()
         self._pages: dict[str, QWidget] = {}
         self._dashboard = DashboardPage(self._change_log)
+        self._search = SearchResultsPage(self._change_log)
         self._godmode = GodModePage()
         self._optimizer = OptimizerPage(self._change_log)
         self._tweaks = TweaksPage(self._change_log)
@@ -85,6 +89,7 @@ class MainWindow(QMainWindow):
 
         page_map = {
             "dashboard": self._dashboard,
+            "search": self._search,
             "godmode": self._godmode,
             "optimizer": self._optimizer,
             "tweaks": self._tweaks,
@@ -139,9 +144,17 @@ class MainWindow(QMainWindow):
         query = self._global_search.text().strip()
         if not query:
             return
-        self._navigate("tweaks")
-        if hasattr(self._tweaks, "set_search_query"):
-            self._tweaks.set_search_query(query)
+        self._navigate("search")
+        self._search.run_search(query)
+
+    def _on_search_text_changed(self, text: str) -> None:
+        if not text.strip():
+            if self._stack.currentWidget() is self._search:
+                self._search.run_search("")
+            return
+        if len(text.strip()) >= 2:
+            self._navigate("search")
+            self._search.run_search(text)
 
     def _update_status(self) -> None:
         admin_txt = "Administrator" if is_admin() else "Standard user"

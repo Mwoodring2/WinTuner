@@ -33,6 +33,16 @@ Covers source (Python) and packaged (`dist\WinTuner\WinTuner.exe`) testing.
 
 ---
 
+## v0.1.2-alpha Unified Search (see also [QA_V0.1.2.md](QA_V0.1.2.md))
+
+| Check | Result | Notes |
+|-------|--------|-------|
+| `test_search_service.py` | **PASS** | 11 automated tests |
+| Unified search UI | **IMPLEMENTED** | Search page + top bar |
+| Manual search walkthrough | **PENDING** | See QA_V0.1.2.md |
+
+---
+
 ## Normal User Launch
 
 - [x] App launches via `python -m wintuner.app.main` without crash (prior sessions)

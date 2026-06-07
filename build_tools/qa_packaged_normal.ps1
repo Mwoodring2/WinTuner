@@ -10,7 +10,8 @@ param(
 
 $ErrorActionPreference = "Stop"
 $ProjectRoot = Split-Path -Parent $PSScriptRoot
-$LogFile = Join-Path $env:USERPROFILE ".wintuner\logs\wintuner.log"
+$ExpectedVersion = (python -c "from wintuner.app.core.version import APP_VERSION; print(APP_VERSION)" 2>$null)
+if (-not $ExpectedVersion) { $ExpectedVersion = "0.1.2-alpha" }
 
 if ([string]::IsNullOrWhiteSpace($ExePath)) {
     $ExePath = Join-Path $ProjectRoot "dist\WinTuner\WinTuner.exe"
@@ -18,8 +19,10 @@ if ([string]::IsNullOrWhiteSpace($ExePath)) {
 
 $ExePath = (Resolve-Path -LiteralPath $ExePath -ErrorAction Stop).Path
 $DistDir = Split-Path -Parent $ExePath
+$LogFile = Join-Path $env:USERPROFILE ".wintuner\logs\wintuner.log"
 
 Write-Host "==> Packaged QA (normal user): $ExePath"
+Write-Host "    Expected version: $ExpectedVersion"
 
 $failures = @()
 
@@ -62,17 +65,19 @@ try {
 
     if (Test-Path $LogFile) {
         $logAfter = Get-Content $LogFile -Raw -ErrorAction SilentlyContinue
-        if ($logAfter -ne $logBefore -or $logAfter -match "0\.1\.1-alpha") {
+        $logTail = if ($logAfter.Length -gt 2000) { $logAfter.Substring($logAfter.Length - 2000) } else { $logAfter }
+        if ($logAfter -ne $logBefore) {
             Add-Pass "Log file updated at $LogFile"
         } else {
             Add-Failure "Log file did not show new startup entries"
         }
-        if ($logAfter -match "0\.1\.1-alpha") {
-            Add-Pass "Log contains version 0.1.1-alpha"
+        $versionPattern = [regex]::Escape($ExpectedVersion)
+        if ($logTail -match $versionPattern) {
+            Add-Pass "Log contains version $ExpectedVersion"
         } else {
-            Add-Failure "Log missing version 0.1.1-alpha"
+            Add-Failure "Log missing version $ExpectedVersion in recent entries"
         }
-        if ($logAfter -match "standard user") {
+        if ($logTail -match "standard user") {
             Add-Pass "Log reports standard user (expected for normal launch)"
         } elseif ($logAfter -match "elevated") {
             Add-Failure "Expected standard user but log shows elevated"

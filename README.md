@@ -2,7 +2,7 @@
 
 
 
-**Version: 0.1.1-alpha** · Local-first · No telemetry · No account
+**Version: 0.1.2-alpha** · Local-first · No telemetry · No account
 
 
 
@@ -15,6 +15,8 @@ WinTuner is a trustworthy Windows 11 utility that combines a **God Mode-style to
 
 
 - A **control-panel launcher** for 23+ built-in Windows tools
+
+- **Unified search** across God Mode tools and tweaks (top bar + Search page)
 
 - A **tweaks library** with risk labels, admin requirements, and undo instructions
 
@@ -264,6 +266,8 @@ docs/
 
 - [Alpha Handoff v0.1.1](docs/HANDOFF_V0.1.1_ALPHA.md)
 
+- [Manual QA Checklist v0.1.2 (Unified Search)](docs/QA_V0.1.2.md)
+
 - [Manual QA Checklist](docs/QA_V0.1.0.md)
 
 - [Release Checklist](docs/RELEASE_CHECKLIST_V0.1.0.md)
@@ -272,7 +276,7 @@ docs/
 
 
 
-## Known Limitations (v0.1.1-alpha)
+## Known Limitations (v0.1.2-alpha)
 
 
 
@@ -280,11 +284,11 @@ docs/
 
 - **Restore points** — app opens System Protection; you create points manually  
 
-- **Global search** — routes to Tweaks page only (v0.1.2-alpha)  
-
 - **Startup count** — estimate from registry Run keys  
 
 - **Classic context menu tweak** — requires sign-out to take effect  
+
+- **Screenshots** — still needed (see docs/SCREENSHOTS_NEEDED.md)
 
 
 
@@ -298,9 +302,9 @@ docs/
 
 | 0.1.0-alpha | Safety audit, logging, QA docs |
 
-| **0.1.1-alpha** | PyInstaller onedir packaging (current) |
+| 0.1.1-alpha | PyInstaller onedir packaging |
 
-| 0.1.2-alpha | Unified search |
+| **0.1.2-alpha** | Unified search (God Mode + Tweaks) — current |
 
 | 0.2.0-alpha | Restore point creation + profile improvements |
 

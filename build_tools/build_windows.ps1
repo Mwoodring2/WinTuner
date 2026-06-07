@@ -76,7 +76,7 @@ if (-not $SkipSmoke) {
     $SmokeResult = "SKIPPED"
 }
 
-$TestCount = 38
+$TestCount = 49
 if ($SkipTests) {
     $TestResult = "SKIPPED"
 } else {

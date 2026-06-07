@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
-    QDialogButtonBox,
     QHBoxLayout,
     QLabel,
     QLineEdit,
@@ -15,20 +14,10 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from wintuner.app.core.admin import admin_required_message, is_admin
-from wintuner.app.core.change_log import ChangeLog, ChangeRecord
-from wintuner.app.core.restore_point import open_system_protection
-from wintuner.app.core.temp_cleanup import preview_cleanup
-from wintuner.app.core.tweak_model import RiskLevel, Tweak
-from wintuner.app.core.tweak_registry import get_all_tweaks, search_tweaks
-from wintuner.app.ui.dialogs import (
-    confirm_dialog,
-    confirm_tweak_dialog,
-    restore_point_prompt,
-    ScrollDialog,
-    show_error,
-    show_info,
-)
+from wintuner.app.core.change_log import ChangeLog
+from wintuner.app.core.tweak_registry import get_all_tweaks, get_tweak, search_tweaks
+from wintuner.app.ui.dialogs import show_error, show_info
+from wintuner.app.ui.tweak_actions import apply_tweak_with_confirmations, show_tweak_detail_dialog
 
 
 class TweaksPage(QWidget):
@@ -86,88 +75,30 @@ class TweaksPage(QWidget):
             item.setData(Qt.ItemDataRole.UserRole, tweak.id)
             self._list.addItem(item)
 
-    def _selected_tweak(self) -> Tweak | None:
+    def _selected_tweak(self):
         item = self._list.currentItem()
         if item is None:
             return None
-        from wintuner.app.core.tweak_registry import get_tweak
-
         return get_tweak(item.data(Qt.ItemDataRole.UserRole))
 
     def _show_detail_from_btn(self) -> None:
         tweak = self._selected_tweak()
         if tweak:
-            self._show_detail_for(tweak)
+            show_tweak_detail_dialog(self, self._change_log, tweak)
 
     def _show_detail(self, item: QListWidgetItem) -> None:
-        from wintuner.app.core.tweak_registry import get_tweak
-
         tweak = get_tweak(item.data(Qt.ItemDataRole.UserRole))
         if tweak:
-            self._show_detail_for(tweak)
-
-    def _show_detail_for(self, tweak: Tweak) -> None:
-        state = tweak.detect()
-        dlg = ScrollDialog(tweak.title, self)
-        sl = dlg.scroll_layout()
-        sl.addWidget(QLabel(f"<b>Category:</b> {tweak.category}"))
-        sl.addWidget(QLabel(tweak.description))
-        sl.addWidget(QLabel(f"<b>Why:</b> {tweak.why_use}"))
-        sl.addWidget(QLabel(f"<b>Risk:</b> {tweak.risk_level.value.capitalize()}"))
-        sl.addWidget(QLabel(f"<b>Current state:</b> {state.description or state.enabled}"))
-        sl.addWidget(QLabel(f"<b>Undo:</b> {tweak.undo_instructions}"))
-        sl.addWidget(QLabel(f"<b>Notes:</b> {tweak.notes}"))
-        sl.addStretch()
-        close_btn = dlg.add_button(QDialogButtonBox.ButtonRole.RejectRole, "Close")
-        close_btn.clicked.connect(dlg.accept)
-        dlg.exec()
+            show_tweak_detail_dialog(self, self._change_log, tweak)
 
     def _apply_selected(self) -> None:
         tweak = self._selected_tweak()
         if tweak is None:
             show_error(self, "No Selection", "Select a tweak from the list first.")
             return
-        if self._do_apply(tweak):
+        if apply_tweak_with_confirmations(self, self._change_log, tweak):
             show_info(self, "Applied", f"{tweak.title} applied successfully.")
             self._refresh_list()
-
-    def _do_apply(self, tweak: Tweak) -> bool:
-        if tweak.requires_admin and not is_admin():
-            show_error(self, "Admin Required", admin_required_message(tweak.title))
-            return False
-        if tweak.risk_level in (RiskLevel.MEDIUM, RiskLevel.HIGH):
-            if not restore_point_prompt(self, open_system_protection):
-                return False
-        if tweak.id == "storage_clear_user_temp":
-            preview = preview_cleanup()
-            if not confirm_dialog(
-                self,
-                "Confirm Temp Cleanup",
-                f"Delete {preview.file_count} items ({preview.total_mb} MB)?",
-            ):
-                return False
-        elif tweak.id == "storage_empty_recycle_bin":
-            if not confirm_dialog(self, "Confirm", "Empty the Recycle Bin permanently?"):
-                return False
-        elif not tweak.opens_settings:
-            if not confirm_tweak_dialog(self, tweak):
-                return False
-
-        state = tweak.detect()
-        result = tweak.apply()
-        record = ChangeRecord.create(
-            tweak_id=tweak.id,
-            tweak_title=tweak.title,
-            previous_value=result.previous_value if result.previous_value is not None else state.raw_value,
-            new_value=result.new_value,
-            success=result.success,
-            error_message="" if result.success else result.message,
-            undo_available=tweak.reversible and tweak.undo_fn is not None,
-        )
-        self._change_log.add(record)
-        if not result.success:
-            show_error(self, "Failed", result.message)
-        return result.success
 
     def set_search_query(self, query: str) -> None:
         self._search.setText(query)
