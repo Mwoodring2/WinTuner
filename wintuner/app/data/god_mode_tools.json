@@ -1,0 +1,212 @@
+{
+  "tools": [
+    {
+      "id": "programs_features",
+      "name": "Programs and Features",
+      "description": "Uninstall or change desktop programs",
+      "command": "control.exe",
+      "command_type": "control",
+      "args": ["appwiz.cpl"],
+      "category": "System"
+    },
+    {
+      "id": "device_manager",
+      "name": "Device Manager",
+      "description": "View and manage hardware devices and drivers",
+      "command": "devmgmt.msc",
+      "command_type": "exe",
+      "args": [],
+      "category": "System"
+    },
+    {
+      "id": "disk_cleanup",
+      "name": "Disk Cleanup",
+      "description": "Free up disk space on selected drives",
+      "command": "cleanmgr.exe",
+      "command_type": "exe",
+      "args": [],
+      "category": "Storage"
+    },
+    {
+      "id": "services",
+      "name": "Services",
+      "description": "Manage Windows services",
+      "command": "services.msc",
+      "command_type": "exe",
+      "args": [],
+      "category": "System",
+      "requires_admin": true
+    },
+    {
+      "id": "task_manager",
+      "name": "Task Manager",
+      "description": "Monitor processes, performance, and startup apps",
+      "command": "taskmgr.exe",
+      "command_type": "exe",
+      "args": [],
+      "category": "System"
+    },
+    {
+      "id": "startup_apps",
+      "name": "Startup Apps",
+      "description": "Choose which apps run at sign-in",
+      "command": "ms-settings:startupapps",
+      "command_type": "ms-settings",
+      "args": [],
+      "category": "Startup"
+    },
+    {
+      "id": "windows_update",
+      "name": "Windows Update",
+      "description": "Check for updates and view update history",
+      "command": "ms-settings:windowsupdate",
+      "command_type": "ms-settings",
+      "args": [],
+      "category": "System"
+    },
+    {
+      "id": "system_properties",
+      "name": "System Properties",
+      "description": "View basic system information",
+      "command": "SystemPropertiesComputerName.exe",
+      "command_type": "exe",
+      "args": [],
+      "category": "System"
+    },
+    {
+      "id": "advanced_system_settings",
+      "name": "Advanced System Settings",
+      "description": "Performance, user profiles, and startup/recovery",
+      "command": "SystemPropertiesAdvanced.exe",
+      "command_type": "exe",
+      "args": [],
+      "category": "System"
+    },
+    {
+      "id": "power_options",
+      "name": "Power Options",
+      "description": "Choose and customize power plans",
+      "command": "powercfg.cpl",
+      "command_type": "shell",
+      "args": [],
+      "category": "Power"
+    },
+    {
+      "id": "network_connections",
+      "name": "Network Connections",
+      "description": "View and manage network adapters",
+      "command": "ncpa.cpl",
+      "command_type": "shell",
+      "args": [],
+      "category": "Network"
+    },
+    {
+      "id": "sound_settings",
+      "name": "Sound Settings",
+      "description": "Output, input, and volume settings",
+      "command": "ms-settings:sound",
+      "command_type": "ms-settings",
+      "args": [],
+      "category": "Hardware"
+    },
+    {
+      "id": "mouse_settings",
+      "name": "Mouse Settings",
+      "description": "Pointer speed, buttons, and scrolling",
+      "command": "ms-settings:devices-mouse",
+      "command_type": "ms-settings",
+      "args": [],
+      "category": "Hardware"
+    },
+    {
+      "id": "display_settings",
+      "name": "Display Settings",
+      "description": "Resolution, scaling, and multiple monitors",
+      "command": "ms-settings:display",
+      "command_type": "ms-settings",
+      "args": [],
+      "category": "Hardware"
+    },
+    {
+      "id": "storage_settings",
+      "name": "Storage Settings",
+      "description": "Disk usage and Storage Sense",
+      "command": "ms-settings:storagesense",
+      "command_type": "ms-settings",
+      "args": [],
+      "category": "Storage"
+    },
+    {
+      "id": "optional_features",
+      "name": "Optional Features",
+      "description": "Add or remove Windows optional features",
+      "command": "ms-settings:optionalfeatures",
+      "command_type": "ms-settings",
+      "args": [],
+      "category": "System"
+    },
+    {
+      "id": "event_viewer",
+      "name": "Event Viewer",
+      "description": "View system and application event logs",
+      "command": "eventvwr.msc",
+      "command_type": "exe",
+      "args": [],
+      "category": "Diagnostics"
+    },
+    {
+      "id": "reliability_monitor",
+      "name": "Reliability Monitor",
+      "description": "View system stability history",
+      "command": "perfmon.exe",
+      "command_type": "exe",
+      "args": ["/rel"],
+      "category": "Diagnostics"
+    },
+    {
+      "id": "resource_monitor",
+      "name": "Resource Monitor",
+      "description": "Detailed CPU, memory, disk, and network usage",
+      "command": "resmon.exe",
+      "command_type": "exe",
+      "args": [],
+      "category": "Diagnostics"
+    },
+    {
+      "id": "windows_security",
+      "name": "Windows Security",
+      "description": "Virus protection, firewall, and account protection",
+      "command": "windowsdefender:",
+      "command_type": "shell",
+      "args": [],
+      "category": "Security"
+    },
+    {
+      "id": "system_restore",
+      "name": "System Restore",
+      "description": "Restore your PC to an earlier restore point",
+      "command": "rstrui.exe",
+      "command_type": "exe",
+      "args": [],
+      "category": "Recovery"
+    },
+    {
+      "id": "system_protection",
+      "name": "System Protection",
+      "description": "Configure restore points and disk protection",
+      "command": "SystemPropertiesProtection.exe",
+      "command_type": "exe",
+      "args": [],
+      "category": "Recovery"
+    },
+    {
+      "id": "environment_variables",
+      "name": "Environment Variables",
+      "description": "Edit user and system environment variables",
+      "command": "rundll32.exe",
+      "command_type": "rundll32",
+      "args": ["sysdm.cpl,EditEnvironmentVariables"],
+      "category": "Developer Tools"
+    }
+  ]
+}

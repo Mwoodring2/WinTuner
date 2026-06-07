@@ -1,0 +1,15 @@
+# PyInstaller build output
+build/
+dist/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.pytest_cache/
+.venv/
+venv/
+
+# Local user data (not part of repo)
+.wintuner/

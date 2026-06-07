@@ -1,0 +1,134 @@
+{
+  "profiles": [
+    {
+      "id": "balanced_cleanup",
+      "name": "Balanced Cleanup",
+      "description": "Safe housekeeping: temp files, tips off, and storage tools.",
+      "icon": "cleanup",
+      "actions": [
+        {
+          "tweak_id": "storage_clear_user_temp",
+          "label": "Clear user temp files",
+          "default_selected": true
+        },
+        {
+          "tweak_id": "privacy_disable_tips",
+          "label": "Disable Windows tips and suggestions",
+          "default_selected": true
+        },
+        {
+          "tweak_id": "storage_open_storage_sense",
+          "label": "Open Storage Sense settings",
+          "default_selected": true
+        }
+      ]
+    },
+    {
+      "id": "gaming_performance",
+      "name": "Gaming / Performance",
+      "description": "Reduce visual overhead and review startup apps.",
+      "icon": "gaming",
+      "actions": [
+        {
+          "tweak_id": "performance_disable_transparency",
+          "label": "Disable transparency effects",
+          "default_selected": true
+        },
+        {
+          "tweak_id": "startup_open_settings",
+          "label": "Open Startup Apps settings",
+          "default_selected": true
+        },
+        {
+          "tweak_id": "background_open_settings",
+          "label": "Open Background Apps settings",
+          "default_selected": true
+        },
+        {
+          "tweak_id": "power_open_options",
+          "label": "Open Power Options",
+          "default_selected": false
+        }
+      ]
+    },
+    {
+      "id": "privacy_lite",
+      "name": "Privacy Lite",
+      "description": "Reduce tips and sync notifications without touching security.",
+      "icon": "privacy",
+      "actions": [
+        {
+          "tweak_id": "privacy_disable_tips",
+          "label": "Disable Windows tips and suggestions",
+          "default_selected": true
+        },
+        {
+          "tweak_id": "privacy_disable_sync_notifications",
+          "label": "Disable sync provider notifications",
+          "default_selected": true
+        },
+        {
+          "tweak_id": "background_open_settings",
+          "label": "Open Background Apps settings",
+          "default_selected": true
+        }
+      ]
+    },
+    {
+      "id": "laptop_battery",
+      "name": "Laptop Battery Saver",
+      "description": "Limit background activity and review power settings.",
+      "icon": "battery",
+      "actions": [
+        {
+          "tweak_id": "background_open_settings",
+          "label": "Open Background Apps settings",
+          "default_selected": true
+        },
+        {
+          "tweak_id": "startup_open_settings",
+          "label": "Open Startup Apps settings",
+          "default_selected": true
+        },
+        {
+          "tweak_id": "power_open_options",
+          "label": "Open Power Options",
+          "default_selected": true
+        },
+        {
+          "tweak_id": "performance_disable_transparency",
+          "label": "Disable transparency effects",
+          "default_selected": false
+        }
+      ]
+    },
+    {
+      "id": "workstation_creator",
+      "name": "Workstation / Creator",
+      "description": "Explorer tweaks for power users and visible file types.",
+      "icon": "workstation",
+      "actions": [
+        {
+          "tweak_id": "explorer_show_extensions",
+          "label": "Show file extensions",
+          "default_selected": true
+        },
+        {
+          "tweak_id": "explorer_show_hidden",
+          "label": "Show hidden files",
+          "default_selected": true
+        },
+        {
+          "tweak_id": "explorer_launch_this_pc",
+          "label": "Open File Explorer to This PC",
+          "default_selected": true
+        },
+        {
+          "tweak_id": "storage_open_storage_sense",
+          "label": "Open Storage Sense settings",
+          "default_selected": false
+        }
+      ]
+    }
+  ]
+}
