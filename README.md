@@ -2,7 +2,7 @@
 
 
 
-**Version: 0.1.2-alpha** · Local-first · No telemetry · No account
+**Version: 0.1.3-alpha** · Local-first · No telemetry · No account
 
 
 
@@ -266,7 +266,11 @@ docs/
 
 - [Alpha Handoff v0.1.1](docs/HANDOFF_V0.1.1_ALPHA.md)
 
+- [Manual QA Checklist v0.1.3 (Release polish)](docs/QA_V0.1.3.md)
+
 - [Manual QA Checklist v0.1.2 (Unified Search)](docs/QA_V0.1.2.md)
+
+- [Release Notes v0.1.2-alpha](docs/RELEASE_NOTES_V0.1.2_ALPHA.md)
 
 - [Manual QA Checklist](docs/QA_V0.1.0.md)
 
@@ -276,7 +280,7 @@ docs/
 
 
 
-## Known Limitations (v0.1.2-alpha)
+## Known Limitations (v0.1.3-alpha)
 
 
 
@@ -304,7 +308,9 @@ docs/
 
 | 0.1.1-alpha | PyInstaller onedir packaging |
 
-| **0.1.2-alpha** | Unified search (God Mode + Tweaks) — current |
+| **0.1.2-alpha** | Unified search (God Mode + Tweaks) |
+
+| **0.1.3-alpha** | Manual QA docs, launcher walkthrough helper, release polish — current |
 
 | 0.2.0-alpha | Restore point creation + profile improvements |
 

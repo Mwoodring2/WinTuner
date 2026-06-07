@@ -11,7 +11,7 @@ param(
 $ErrorActionPreference = "Stop"
 $ProjectRoot = Split-Path -Parent $PSScriptRoot
 $ExpectedVersion = (python -c "from wintuner.app.core.version import APP_VERSION; print(APP_VERSION)" 2>$null)
-if (-not $ExpectedVersion) { $ExpectedVersion = "0.1.2-alpha" }
+if (-not $ExpectedVersion) { $ExpectedVersion = "0.1.3-alpha" }
 
 if ([string]::IsNullOrWhiteSpace($ExePath)) {
     $ExePath = Join-Path $ProjectRoot "dist\WinTuner\WinTuner.exe"

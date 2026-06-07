@@ -2,6 +2,9 @@
 build/
 dist/
 
+# Release artifacts (upload to GitHub Releases, do not commit zips)
+release/*.zip
+
 # Python
 __pycache__/
 *.py[cod]
